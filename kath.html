@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Wie alt ist die Kathryn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-weight: normal;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    p {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Wolltest du das schon immer wissen</h1>
+  <button onclick="calculateAge()">Wie alt ist die Kathryn?</button>
+  <p id="result"></p>
+
+  <script>
+    function calculateAge() {
+      const birthDate = new Date(1976, 11, 18); // December 18, 1976
+
+      const today = new Date();
+
+      // Calculate full years
+      let years = today.getFullYear() - birthDate.getFullYear();
+
+      // Check if birthday has occurred yet this year
+      const hasHadBirthdayThisYear =
+        today.getMonth() > birthDate.getMonth() ||
+        (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+
+      if (!hasHadBirthdayThisYear) {
+        years--;
+      }
+
+      // Get last birthday date
+      const lastBirthday = new Date(
+        today.getFullYear() - (hasHadBirthdayThisYear ? 0 : 1),
+        birthDate.getMonth(),
+        birthDate.getDate()
+      );
+
+      // Calculate days since last birthday
+      const diffTime = today - lastBirthday;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      // Display message
+      const result = (diffDays === 0)
+        ? `Kathryn ist heute genau ${years} Jahre alt. 🎉`
+        : `Kathryn ist ${years} Jahre und ${diffDays} Tage alt.`;
+
+      document.getElementById("result").textContent = result;
+    }
+  </script>
+
+</body>
+</html>
